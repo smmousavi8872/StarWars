@@ -72,12 +72,25 @@ android {
 
 dependencies {
 
+    // Modules dependencies
+    implementation(project(":core:data:datasource"))
+    implementation(project(":core:data:repository"))
+    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:common"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:details"))
+    implementation(project(":sync:work"))
+
     // AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtimeCompose)
-
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
@@ -98,16 +111,13 @@ dependencies {
     api(libs.androidx.compose.runtime)
     api(libs.androidx.compose.ui.util)
 
-    // navigation
+    // Navigation
     implementation(libs.androidx.navigation.compose)
 
-    // coil
+    // Coil
     implementation(libs.coil.kt)
     implementation(libs.coil.kt.compose)
     implementation(libs.coil.kt.svg)
-
-    // Apollo GraphQL
-    implementation(libs.apollo.runtime)
 
     // Paging 3
     implementation (libs.androidx.paging.runtime.ktx)
@@ -119,15 +129,18 @@ dependencies {
     kapt(libs.hilt.ext.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // coroutine
+    // Coroutine
     implementation(libs.kotlinx.coroutines.guava)
 
-    // networking
+    // Networking
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
 
-    // room
+    // Apollo GraphQL
+    implementation(libs.apollo.runtime)
+
+    // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
