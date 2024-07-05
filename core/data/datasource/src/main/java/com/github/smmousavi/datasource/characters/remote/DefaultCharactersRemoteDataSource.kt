@@ -9,12 +9,14 @@ import javax.inject.Inject
 class DefaultCharactersRemoteDataSource @Inject constructor(private val apolloClient: ApolloClient) :
     CharactersRemoteDataSource {
 
-    override suspend fun getAllCharacters(): ApolloResponse<PeopleQuery.Data> {
+    override suspend fun getAllCharacters(
+        first: Int,
+        after: String,
+    ): ApolloResponse<PeopleQuery.Data> {
         return apolloClient.query(PeopleQuery()).execute()
     }
 
     override suspend fun getCharacterById(id: String): ApolloResponse<PersonQuery.Data> {
         return apolloClient.query(PersonQuery(id)).execute()
     }
-
 }

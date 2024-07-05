@@ -1,17 +1,17 @@
 package com.github.smmousavi.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
 import com.github.smmousavi.database.entity.CharacterEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDao {
 
-    // update or insert a products under the primary key
-    @Upsert
-    suspend fun upsertCharacters(products: List<CharacterEntity>)
+     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllCharacters(products: List<CharacterEntity>)
 
     @Query("SELECT * FROM characters")
     fun getAllCharacters(): List<CharacterEntity>
