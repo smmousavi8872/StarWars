@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
 
+    // apollo graphql
+    implementation(libs.apollo.runtime)
+
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)

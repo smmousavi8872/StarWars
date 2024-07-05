@@ -44,6 +44,9 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:network"))
 
+    // apollo graphql
+    implementation(libs.apollo.runtime)
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
