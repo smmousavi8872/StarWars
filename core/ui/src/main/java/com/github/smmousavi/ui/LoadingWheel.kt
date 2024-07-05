@@ -32,7 +32,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.smmousavi.ui.theme.StarsWar
+import com.github.smmousavi.ui.theme.StarsWarTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -137,7 +137,7 @@ fun OverlayLoadingWheel(
 @Preview(showBackground = true)
 @Composable
 fun LoadingWheelPreview() {
-    StarsWar {
+    StarsWarTheme {
         Surface {
             LoadingWheel(contentDesc = "LoadingWheel")
         }
@@ -147,7 +147,7 @@ fun LoadingWheelPreview() {
 @Preview(showBackground = true)
 @Composable
 fun OverlayLoadingWheelPreview() {
-    StarsWar {
+    StarsWarTheme {
         Surface {
             OverlayLoadingWheel(contentDesc = "LoadingWheel")
         }

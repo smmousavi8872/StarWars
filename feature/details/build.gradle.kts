@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -30,9 +31,30 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.5"
+    }
 }
 
 dependencies {
+
+    implementation(project(":core:model"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:common"))
+    implementation(project(":core:ui"))
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.ext.compiler)
+    kaptTest(libs.hilt.compiler)
+    testImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.hilt.android.testing)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

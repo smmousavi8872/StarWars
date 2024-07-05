@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
+
     // AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -84,6 +85,9 @@ dependencies {
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.ext.compiler)
     kaptTest(libs.hilt.compiler)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     // Testing
     testImplementation(libs.androidx.work.testing)
