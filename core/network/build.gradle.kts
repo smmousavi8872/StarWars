@@ -1,8 +1,8 @@
 plugins {
+    id("kotlin-kapt")
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.apolloPlugin)
-    id("kotlin-kapt")
 }
 
 android {
@@ -16,16 +16,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -36,23 +26,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-        }
+        buildConfig = true
     }
 }
 
@@ -63,37 +37,44 @@ apollo {
 }
 
 dependencies {
-
-    // AndroidX
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.ext.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    kaptTest(libs.hilt.compiler)
+    testImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.hilt.android.testing)
 
-    // Coroutine
+    // Retrofit
     implementation(libs.kotlinx.coroutines.guava)
-
-    // Networking
+    implementation(libs.coil.kt)
+    implementation(libs.androidx.tracing.ktx)
+    implementation(libs.coil.kt.svg)
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
+    implementation(libs.retrofit.kotlin.serialization)
 
-    // Apollo GraphQL
+    // apollo graphql
     implementation(libs.apollo.runtime)
 
-    // Coil
-    implementation(libs.coil.kt)
-    implementation(libs.coil.kt.compose)
-    implementation(libs.coil.kt.svg)
+    // Testing
+    testImplementation(libs.androidx.work.testing)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito)
+    testImplementation(libs.turbine)
+    testImplementation(libs.junit)
+    testImplementation(libs.mock.webserver)
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.hilt.android.testing)
 
-    // Others
-    implementation(libs.androidx.tracing.ktx)
+    // Android Test
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.androidx.junit)
 }

@@ -1,7 +1,7 @@
 plugins {
+    id("kotlin-kapt")
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
 }
 
 android {
@@ -35,27 +35,12 @@ android {
     }
 
     buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-        }
+        buildConfig = true
     }
 }
 
 dependencies {
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

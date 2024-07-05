@@ -1,0 +1,22 @@
+query Planets($first: Int, $after: String) {
+    allPlanets(first: $first, after: $after) {
+        pageInfo {
+            hasNextPage
+            endCursor
+        }
+        planets {
+            name
+            diameter
+            climates
+            population
+            residentConnection {
+                residents {
+                    name
+                    species {
+                        name
+                    }
+                }
+            }
+        }
+    }
+}
