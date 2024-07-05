@@ -1,11 +1,10 @@
 plugins {
-    id("kotlin-kapt")
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.github.smmousavi.datasource"
+    namespace = "com.github.smmousavi.pagingsource"
     compileSdk = 34
 
     defaultConfig {
@@ -24,36 +23,26 @@ android {
             )
         }
     }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    buildFeatures {
-        buildConfig = true
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    implementation(project(":core:model"))
+    implementation(project(":core:data:datasource"))
     implementation(project(":core:database"))
     implementation(project(":core:network"))
+    implementation(project(":core:model"))
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     // apollo graphql
     implementation(libs.apollo.runtime)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-    kapt(libs.hilt.ext.compiler)
-    kaptTest(libs.hilt.compiler)
-    testImplementation(libs.hilt.android.testing)
-    androidTestImplementation(libs.hilt.android.testing)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

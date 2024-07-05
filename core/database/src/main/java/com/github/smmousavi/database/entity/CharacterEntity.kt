@@ -22,7 +22,7 @@ data class CharacterEntity(
     @ColumnInfo(name = "height")
     val height: Int,
     @ColumnInfo(name = "mass")
-    val mass: Float,
+    val mass: Double,
     @ColumnInfo(name = "skin_color")
     val skinColor: String,
 )

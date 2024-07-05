@@ -46,6 +46,7 @@ kotlinxCoroutines = "1.8.0"
 kotlinxDatetime = "0.5.0"
 moduleGraph = "2.5.0"
 okhttp = "4.12.0"
+pagingRuntimeKtx = "3.3.0"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
 robolectric = "4.12.1"
@@ -65,6 +66,7 @@ mockWebServer = "4.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

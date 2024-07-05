@@ -11,6 +11,6 @@ import dagger.hilt.components.SingletonComponent
 internal object DaosModule {
 
     @Provides
-    fun providesCharacterDao(database: StarsWarDatabase) = database.productDao()
+    fun providesCharacterDao(database: StarsWarDatabase) = database.characterDao()
 
 }

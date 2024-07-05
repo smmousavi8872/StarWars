@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:database"))
     implementation(project(":core:data:datasource"))
+    implementation(project(":core:data:pagingsource"))
 
     // AppCompat
     implementation(libs.androidx.core.ktx)
@@ -62,6 +63,12 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
+
+    // apollo graphql
+    implementation(libs.apollo.runtime)
+
+    // Paging 3
+    implementation(libs.androidx.paging.runtime.ktx)
 
     // Room
     implementation(libs.room.runtime)

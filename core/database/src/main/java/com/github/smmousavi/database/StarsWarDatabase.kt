@@ -8,6 +8,5 @@ import com.github.smmousavi.database.entity.CharacterEntity
 @Database(entities = [CharacterEntity::class], version = 1, exportSchema = true)
 abstract class StarsWarDatabase : RoomDatabase() {
 
-    abstract fun productDao(): CharacterDao
-
+    abstract fun characterDao(): CharacterDao
 }
