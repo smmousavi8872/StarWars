@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+//        includeBuild("convention")
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -19,6 +20,18 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StarWars"
+rootProject.name = "StarsWar"
 include(":app")
- 
+include(":core:database")
+include(":core:model")
+include(":core:network")
+include(":core:ui")
+include(":core:test-doubles")
+include(":sync:work")
+include(":core:data:datasource")
+include(":core:data:repository")
+include(":core:domain")
+include(":feature:search")
+include(":core:common")
+include(":feature:home")
+include(":feature:details")

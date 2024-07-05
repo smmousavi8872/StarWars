@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">StarWars</string>
+    <string name="app_name">StarsWar</string>
+    <string name="product_list">Characters List</string>
 </resources>
