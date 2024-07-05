@@ -10,16 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
 import com.github.smmousavi.model.Character
 
 
 @Composable
-fun CharacterList(characters: List<Character>) {
+fun CharacterList(characters: LazyPagingItems<Character>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.padding(8.dp)
     ) {
-        items(characters.size) { index ->
+        items(characters.itemCount) { index ->
             Card(
                 modifier = Modifier
                     .padding(8.dp),
@@ -28,7 +29,9 @@ fun CharacterList(characters: List<Character>) {
                     defaultElevation = 4.dp
                 )
             ) {
-                CharacterItem(characters[index])
+                characters[index]?.let {
+                    CharacterItem(it)
+                }
             }
         }
     }
@@ -104,8 +107,6 @@ fun ProductListPreview() {
             eyeColor = "Brown",
             mass = 70.3,
         )
-
-
     )
-    CharacterList(characters = sampleProducts)
+//    CharacterList(characters = sampleProducts)
 }

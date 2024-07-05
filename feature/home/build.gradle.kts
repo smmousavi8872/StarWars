@@ -53,7 +53,6 @@ dependencies {
 
     // Paging
     implementation(libs.androidx.paging.runtime.ktx)
-    // Paging Compose
     implementation(libs.androidx.paging.compose)
 
     // Hilt

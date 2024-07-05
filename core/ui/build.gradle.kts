@@ -93,6 +93,10 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
 
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+
     kapt(libs.hilt.compiler)
     kapt(libs.hilt.ext.compiler)
     kaptTest(libs.hilt.compiler)
