@@ -1,6 +1,6 @@
 package com.github.smmousavi.datasource.film
 
-import com.github.smmousavi.common.data.datasource.BaseRemoteDataSource
+import com.github.smmousavi.common.data.datasource.remote.DefaultBaseRemoteDataSource
 
-class FilmRemoteDataSource : BaseRemoteDataSource() {
+class FilmRemoteDataSource : DefaultBaseRemoteDataSource() {
 }

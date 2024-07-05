@@ -1,6 +1,7 @@
 package com.github.smmousavi.datasource.film
 
-import com.github.smmousavi.common.data.datasource.BaseLocalDataSource
+import com.github.smmousavi.common.data.datasource.local.DefaultBaseLocalDataSource
 
-class FilmLocalDataSource : BaseLocalDataSource() {
+
+class FilmLocalDataSource : DefaultBaseLocalDataSource() {
 }

@@ -1,6 +1,6 @@
 package com.github.smmousavi.repository
 
-import com.github.smmousavi.common.data.repository.BaseRepository
+import com.github.smmousavi.common.data.repository.DefaultBaseRepository
 
-class FilmRepository : BaseRepository() {
+class FilmRepository : DefaultBaseRepository() {
 }
