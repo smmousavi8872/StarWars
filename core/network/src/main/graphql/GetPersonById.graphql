@@ -1,0 +1,28 @@
+query GetPersonById($personID: ID!) {
+    person(personID: $personID) {
+        id
+        name
+        birthYear
+        eyeColor
+        gender
+        hairColor
+        height
+        mass
+        skinColor
+        homeworld {
+            id
+            name
+        }
+        filmConnection {
+            films {
+                id
+                title
+            }
+        }
+        species {
+            id
+            name
+            language
+        }
+    }
+}

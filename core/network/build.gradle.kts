@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.apolloPlugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -54,12 +56,44 @@ android {
     }
 }
 
+apollo {
+    service("service") {
+        packageName.set("com.github.smmousavi.network")
+    }
+}
+
 dependencies {
 
+    // AndroidX
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.ext.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Coroutine
+    implementation(libs.kotlinx.coroutines.guava)
+
+    // Networking
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson)
+
+    // Apollo GraphQL
+    implementation(libs.apollo.runtime)
+
+    // Coil
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.compose)
+    implementation(libs.coil.kt.svg)
+
+    // Others
+    implementation(libs.androidx.tracing.ktx)
 }

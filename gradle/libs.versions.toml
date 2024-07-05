@@ -1,6 +1,7 @@
 [versions]
 agp = "8.4.1"
-apolloRuntime = "3.0.0"
+apolloRuntime = "3.8.4"
+apolloPlugin = "3.8.4"
 kotlin = "1.9.20"
 coreKtx = "1.13.1"
 junitVersion = "1.1.5"
@@ -160,6 +161,7 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
+apolloPlugin = { id = "com.apollographql.apollo3", version.ref = "apolloPlugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

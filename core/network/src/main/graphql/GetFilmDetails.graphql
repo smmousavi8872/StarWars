@@ -1,0 +1,25 @@
+query GetFilmDetails($filmID: ID!) {
+    film(filmID: $filmID) {
+        title
+        episodeID
+        openingCrawl
+        director
+        producers
+        releaseDate
+        characterConnection {
+            characters {
+                name
+                homeworld {
+                    name
+                }
+            }
+        }
+        planetConnection {
+            planets {
+                name
+                climates
+                population
+            }
+        }
+    }
+}
