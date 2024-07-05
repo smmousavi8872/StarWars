@@ -23,11 +23,20 @@ class DefaultCharactersRepository @Inject constructor(
     @Dispatcher(AppDispatchers.IO) val ioDispatcher: CoroutineDispatcher,
 ) : CharactersRepository {
 
-    override suspend fun getCharactersStream() = Pager(
-        config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-        pagingSourceFactory = { CharactersPagingSource(localDataSource, remoteDataSource) }
-    ).flow
-
+    fun getPeopleStream(): Flow<Result<PagingData<Character>>> = flow {
+        emit(Result.Loading)
+        try {
+            val pager = Pager(
+                config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+                pagingSourceFactory = { CharactersPagingSource(localDataSource, remoteDataSource) }
+            ).flow
+            pager.collect {
+                emit(Result.Success(it))
+            }
+        } catch (e: Exception) {
+            emit(Result.Error(e))
+        }
+    }
 
     override suspend fun getCharacterById(id: String) = flow {
         emit(Result.Loading)
