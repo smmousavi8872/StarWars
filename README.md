@@ -61,3 +61,12 @@ The API requests from SWAPI are nested APIs, so to handle them GraphQL was used.
 To download the GraphQL schema, use the following Gradle command:
 ```bash
  ./gradlew :core:network:downloadApolloSchema --endpoint='https://swapi-graphql.netlify.app/.netlify/functions/index' --schema=core/network/src/main/graphql/schema
+```
+
+## How to Run
+
+1. Clone the repository: `git clone https://github.com/smmousavi8872/StarsWar`
+2. Open the project in Android Studio.
+3. Build and run the application on an emulator or device.
+
+
