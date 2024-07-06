@@ -4,6 +4,7 @@ import com.github.smmousavi.database.entity.CharacterEntity
 import com.github.smmousavi.model.Character
 import com.github.smmousavi.network.AllPeopleQuery
 import com.github.smmousavi.network.PersonQuery
+import com.github.smmousavi.network.retrofit.response.CharacterResponse
 
 
 fun AllPeopleQuery.Person?.asEntity() = CharacterEntity(
@@ -15,7 +16,8 @@ fun AllPeopleQuery.Person?.asEntity() = CharacterEntity(
     hairColor = this?.hairColor ?: "",
     height = this?.height ?: 0,
     mass = this?.mass ?: 0.0,
-    skinColor = this?.skinColor ?: ""
+    skinColor = this?.skinColor ?: "",
+    searched = false
 )
 
 fun CharacterEntity.asExternalModel() = Character(
@@ -51,7 +53,8 @@ fun PersonQuery.Person.asEntity(): CharacterEntity = CharacterEntity(
     hairColor = hairColor ?: "",
     height = height ?: 0,
     mass = mass ?: 0.0,
-    skinColor = skinColor ?: ""
+    skinColor = skinColor ?: "",
+    searched = false
 )
 
 fun PersonQuery.Person.asExternalModel(): Character = Character(
@@ -66,5 +69,29 @@ fun PersonQuery.Person.asExternalModel(): Character = Character(
     skinColor = skinColor ?: ""
 )
 
+fun CharacterResponse.asEntity(): CharacterEntity = CharacterEntity(
+    id = id ?: "",
+    name = name ?: "",
+    birthYear = birthYear ?: "",
+    eyeColor = eyeColor ?: "",
+    gender = gender ?: "",
+    hairColor = hairColor ?: "",
+    height = height ?: 0,
+    mass = mass ?: 0.0,
+    skinColor = skinColor ?: "",
+    searched = true
+)
+
+fun CharacterResponse.asExternalModel(): Character = Character(
+    id = id ?: "",
+    name = name ?: "",
+    birthYear = birthYear ?: "",
+    eyeColor = eyeColor ?: "",
+    gender = gender ?: "",
+    hairColor = hairColor ?: "",
+    height = height ?: 0,
+    mass = mass ?: 0.0,
+    skinColor = skinColor ?: ""
+)
 
 

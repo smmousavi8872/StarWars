@@ -10,8 +10,8 @@ data class Character(
     val height: Int,
     val mass: Double,
     val skinColor: String,
-//    val homeworld: Planet?,
-//    val films: List<Film>
+//    val films: List<Film>,
+//    val species: Species,
 )
 
 

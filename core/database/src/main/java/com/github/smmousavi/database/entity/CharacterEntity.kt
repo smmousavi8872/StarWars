@@ -25,5 +25,7 @@ data class CharacterEntity(
     val mass: Double,
     @ColumnInfo(name = "skin_color")
     val skinColor: String,
+    @ColumnInfo(name = "searched")
+    val searched: Boolean,
 )
 

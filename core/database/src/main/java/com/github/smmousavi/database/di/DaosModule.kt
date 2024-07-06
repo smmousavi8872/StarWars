@@ -13,4 +13,7 @@ internal object DaosModule {
     @Provides
     fun providesCharacterDao(database: StarsWarDatabase) = database.characterDao()
 
+    @Provides
+    fun providesSearchCharacterDao(database: StarsWarDatabase) = database.searchCharacterDao()
+
 }

@@ -14,7 +14,8 @@ fun AllPeopleQuery.Person.asEntity() = CharacterEntity(
     hairColor = hairColor ?: "",
     height = height ?: 0,
     mass = mass ?: 0.0,
-    skinColor = skinColor ?: ""
+    skinColor = skinColor ?: "",
+    searched = false
 )
 
 fun AllPeopleQuery.Person.asExternalModel() = Character(
@@ -38,7 +39,8 @@ fun PersonQuery.Person.asEntity(): CharacterEntity = CharacterEntity(
     hairColor = hairColor ?: "",
     height = height ?: 0,
     mass = mass ?: 0.0,
-    skinColor = skinColor ?: ""
+    skinColor = skinColor ?: "",
+    searched = false
 )
 
 fun PersonQuery.Person.asExternalModel(): Character = Character(

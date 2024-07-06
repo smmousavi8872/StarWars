@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomePageViewModel @Inject constructor(private val charactersUseCase: GetCharactersUseCase) :
+class HomeScreenViewModel @Inject constructor(private val charactersUseCase: GetCharactersUseCase) :
     ViewModel() {
 
     private val _characters = MutableStateFlow<Result<Flow<PagingData<Character>>>>(Result.Loading)

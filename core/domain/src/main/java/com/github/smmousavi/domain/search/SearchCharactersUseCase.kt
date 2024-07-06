@@ -6,5 +6,5 @@ import com.github.smmousavi.model.Character
 import kotlinx.coroutines.flow.Flow
 
 interface SearchCharactersUseCase {
-    suspend operator fun invoke(): Flow<Result<Flow<PagingData<Character>>>>
+    suspend operator fun invoke(query: String): Flow<Result<Flow<PagingData<Character>>>>
 }
