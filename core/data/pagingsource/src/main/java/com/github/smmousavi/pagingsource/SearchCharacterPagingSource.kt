@@ -2,38 +2,34 @@ package com.github.smmousavi.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.apollographql.apollo3.ApolloClient
+import com.github.smmousavi.asEntity
+import com.github.smmousavi.asExternalModel
+import com.github.smmousavi.datasource.searchcharacter.local.SearchCharacterLocalDataSource
+import com.github.smmousavi.datasource.searchcharacter.remote.SearchCharacterRemoteDataSource
 import com.github.smmousavi.model.Character
 
-//class SearchCharacterPagingSource(
-//    private val apolloClient: ApolloClient,
-//    private val searchQuery: String,
-//) : PagingSource<Int, Character>() {
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
-//        val page = params.key ?: 1
-//        try {
-////            val response = apolloClient.query(SearchPeopleQuery(searchQuery)).await()
-////            val results = response.data?.allPeople?.people?.map { person ->
-////                Person(
-////                    name = person.name,
-////                    height = person.height,
-////                    mass = person.mass,
-////                    gender = person.gender,
-////                    homeworld = person.homeworld?.name ?: "Unknown"
-////                )
-////            } ?: emptyList()
-//
-//            return LoadResult.Page(
-//                data = results,
-//                prevKey = if (page > 1) page - 1 else null,
-//                nextKey = if (results.isNotEmpty()) page + 1 else null
-//            )
-//        } catch (exception: Exception) {
-//            return LoadResult.Error(exception)
-//        }
-//    }
-//
-//    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
-//        return state.anchorPosition
-//    }
-//}
+class SearchCharacterPagingSource(
+    private val localDataSource: SearchCharacterLocalDataSource,
+    private val remoteDataSource: SearchCharacterRemoteDataSource,
+    private val searchQuery: String,
+) : PagingSource<Int, Character>() {
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
+        return try {
+            val nextPage = params.key ?: 1
+            val response = remoteDataSource.searchCharacter(searchQuery, nextPage)
+            localDataSource.insertSearchedCharacters(response.results.map { char -> char.asEntity() })
+            LoadResult.Page(
+                data = response.results.map { char -> char.asExternalModel() },
+                prevKey = if (nextPage == 1) null else nextPage - 1,
+                nextKey = if (response.next == null) null else nextPage + 1
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
+        return state.anchorPosition
+    }
+}
