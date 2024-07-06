@@ -1,5 +1,6 @@
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
@@ -63,13 +64,16 @@ fun HomeScreen(navController: NavHostController, viewModel: HomePageViewModel = 
         ) {
             when (val result = charactersState) {
                 is Result.Loading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
                         LoadingWheel("Loading...")
                     }
                 }
 
                 is Result.Success -> {
                     val items = result.data.collectAsLazyPagingItems()
+                    if (items.itemCount == 0) {
+                        LoadingWheel("Loading...")
+                    }
                     CharacterList(characters = items)
                 }
 
@@ -89,3 +93,4 @@ fun HomeScreen(navController: NavHostController, viewModel: HomePageViewModel = 
         }
     }
 }
+
