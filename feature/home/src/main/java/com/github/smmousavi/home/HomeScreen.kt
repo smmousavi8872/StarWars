@@ -64,7 +64,10 @@ fun HomeScreen(navController: NavHostController, viewModel: HomePageViewModel = 
         ) {
             when (val result = charactersState) {
                 is Result.Loading -> {
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+                    ) {
                         LoadingWheel("Loading...")
                     }
                 }
@@ -74,7 +77,10 @@ fun HomeScreen(navController: NavHostController, viewModel: HomePageViewModel = 
                     if (items.itemCount == 0) {
                         LoadingWheel("Loading...")
                     }
-                    CharacterList(characters = items)
+                    CharacterList(characters = items) { id ->
+                        navController.navigate("details/${id}")
+                    }
+
                 }
 
                 is Result.Error -> {

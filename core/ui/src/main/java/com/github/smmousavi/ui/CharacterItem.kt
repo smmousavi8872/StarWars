@@ -1,6 +1,7 @@
 package com.github.smmousavi.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,13 +21,15 @@ import androidx.compose.ui.unit.sp
 import com.github.smmousavi.model.Character
 
 @Composable
-fun CharacterItem(person: Character) {
+fun CharacterItem(person: Character, onClick: (String) -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick(person.id) }
     ) {
         Row(
             modifier = Modifier
@@ -72,5 +75,5 @@ fun ProductItemPreview() {
         eyeColor = "Brown",
         mass = 70.3,
     )
-    CharacterItem(sampleProduct)
+    CharacterItem(sampleProduct, {})
 }
