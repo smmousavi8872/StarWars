@@ -1,8 +1,11 @@
-query AllPeople($first: Int, $after: String) {
+query AllPeople($first: Int!, $after: String!) {
     allPeople(first: $first, after: $after) {
         totalCount
         people {
+            id
             name
+            edited
+            created
             birthYear
             eyeColor
             gender
@@ -12,23 +15,23 @@ query AllPeople($first: Int, $after: String) {
             skinColor
             filmConnection {
                 films {
+                    id
                     title
                     created
                     director
-                    id
                     openingCrawl
                 }
             }
             species {
+                id
                 language
                 name
                 homeworld {
+                    id
+                    name
                     population
                 }
             }
-            created
-            edited
-            id
         }
     }
 }

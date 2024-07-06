@@ -62,6 +62,7 @@ android {
 dependencies {
 
     implementation(project(":core:model"))
+    implementation(project(":core:test-doubles"))
 
     // AndroidX
     implementation(libs.androidx.core.ktx)

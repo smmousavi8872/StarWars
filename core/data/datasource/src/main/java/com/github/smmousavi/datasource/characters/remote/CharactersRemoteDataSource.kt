@@ -9,6 +9,4 @@ interface CharactersRemoteDataSource {
 
     suspend fun getCharacterById(personId: String): ApolloResponse<PersonQuery.Data>
 
-    suspend fun searchCharacter(searchTerm: String): ApolloResponse<AllPeopleQuery.Data>
-
 }

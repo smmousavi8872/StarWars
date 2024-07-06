@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.smmousavi.model.Character
+import com.github.smmousavi.test_doubles.character.Faker
 
 @Composable
 fun CharacterItem(character: Character, onClick: (String) -> Unit) {
@@ -52,12 +53,12 @@ fun CharacterItem(character: Character, onClick: (String) -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Height: ${character.height}",
+                    text = "Height: ${character.height} cm",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "id: ${character.id}",
+                    text = "gender: ${character.gender}",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -68,17 +69,6 @@ fun CharacterItem(character: Character, onClick: (String) -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemPreview() {
-    val sampleProduct = Character(
-        id = "1",
-        name = "Mohsen",
-        birthYear = "2000",
-        height = 180,
-        gender = "male",
-        skinColor = "White",
-        hairColor = "Black",
-        eyeColor = "Brown",
-        mass = 70.3,
-    )
-    CharacterItem(sampleProduct, {})
+fun CharacterItemPreview() {
+    CharacterItem(Faker.character(), {})
 }
