@@ -1,4 +1,3 @@
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,12 +75,17 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel 
                 }
 
                 is Result.Success -> {
-                    val items = result.data.collectAsLazyPagingItems()
-                    if (items.itemCount == 0) {
-                        LoadingWheel("Loading...")
-                    }
-                    CharacterList(characters = items) { id ->
-                        navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+                    ) {
+                        val items = result.data.collectAsLazyPagingItems()
+                        if (items.itemCount == 0) {
+                            LoadingWheel("Loading...")
+                        }
+                        CharacterList(characters = items) { id ->
+                            navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
+                        }
                     }
                 }
 
