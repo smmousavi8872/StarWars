@@ -2,10 +2,10 @@ package com.github.smmousavi.repository
 
 import com.github.smmousavi.database.entity.CharacterEntity
 import com.github.smmousavi.model.Character
-import com.github.smmousavi.network.PeopleQuery
+import com.github.smmousavi.network.AllPeopleQuery
 import com.github.smmousavi.network.PersonQuery
 
-fun PeopleQuery.Person.asEntity() = CharacterEntity(
+fun AllPeopleQuery.Person.asEntity() = CharacterEntity(
     id = id,
     name = name ?: "",
     birthYear = birthYear ?: "",
@@ -17,7 +17,7 @@ fun PeopleQuery.Person.asEntity() = CharacterEntity(
     skinColor = skinColor ?: ""
 )
 
-fun PeopleQuery.Person.asExternalModel() = Character(
+fun AllPeopleQuery.Person.asExternalModel() = Character(
     id = id,
     name = name ?: "",
     birthYear = birthYear ?: "",

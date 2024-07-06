@@ -17,8 +17,8 @@ fun AppNavigation() {
         composable("home") { HomeScreen(navController) }
         composable("search") { SearchScreen(navController) }
         composable(
-            "details/{personId}",
-            arguments = listOf(navArgument("personId") { type = NavType.StringType })
+            "details/{characterId}",
+            arguments = listOf(navArgument("characterId") { type = NavType.StringType })
         ) { backStackEntry ->
             CharacterDetailsScreen(backStackEntry.arguments?.getString("characterId") ?: "")
         }

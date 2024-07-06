@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.github.smmousavi.model.Character
 
 @Composable
-fun CharacterItem(person: Character, onClick: (String) -> Unit) {
+fun CharacterItem(character: Character, onClick: (String) -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(
@@ -29,7 +29,7 @@ fun CharacterItem(person: Character, onClick: (String) -> Unit) {
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick(person.id) }
+            .clickable { onClick(character.id) }
     ) {
         Row(
             modifier = Modifier
@@ -41,18 +41,23 @@ fun CharacterItem(person: Character, onClick: (String) -> Unit) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = person.name,
+                    text = character.name,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = "Birth Year: ${person.birthYear}",
+                    text = "Birth Year: ${character.birthYear}",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Height: ${person.height}",
+                    text = "Height: ${character.height}",
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "id: ${character.id}",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

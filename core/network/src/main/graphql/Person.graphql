@@ -1,5 +1,5 @@
-query Person($personID: ID!) {
-    person(personID: $personID) {
+query Person($personId: ID!) {
+    person(id: $personId) {
         id
         name
         birthYear
@@ -9,20 +9,33 @@ query Person($personID: ID!) {
         height
         mass
         skinColor
-        homeworld {
-            id
-            name
-        }
         filmConnection {
+            totalCount
             films {
                 id
                 title
+                created
+                director
+                openingCrawl
             }
         }
         species {
             id
             name
             language
+            homeworld {
+                population
+            }
+            filmConnection {
+                totalCount
+                films {
+                    id
+                    title
+                    director
+                    releaseDate
+                    openingCrawl
+                }
+            }
         }
     }
 }
