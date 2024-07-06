@@ -16,7 +16,7 @@ class DefaultCharactersRemoteDataSource @Inject constructor(private val apolloCl
         return apolloClient.query(PeopleQuery()).execute()
     }
 
-    override suspend fun getCharacterById(id: String): ApolloResponse<PersonQuery.Data> {
-        return apolloClient.query(PersonQuery(id)).execute()
+    override suspend fun getCharacterById(personId: String): ApolloResponse<PersonQuery.Data> {
+        return apolloClient.query(PersonQuery(personId)).execute()
     }
 }

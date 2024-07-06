@@ -16,7 +16,7 @@ fun CharacterDetailsItem(
     modifier: Modifier = Modifier,
     character: Character,
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp)) {
         Text("Name: ${character.name}", style = MaterialTheme.typography.headlineSmall)
         Spacer(Modifier.height(10.dp))
         Text("Height: ${character.height}")

@@ -7,6 +7,6 @@ import com.github.smmousavi.network.PersonQuery
 interface CharactersRemoteDataSource {
     suspend fun getAllCharacters(first: Int, after: String): ApolloResponse<PeopleQuery.Data>
 
-    suspend fun getCharacterById(id: String): ApolloResponse<PersonQuery.Data>
+    suspend fun getCharacterById(personId: String): ApolloResponse<PersonQuery.Data>
 
 }
