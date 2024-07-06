@@ -84,6 +84,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:ui"))
     implementation(project(":core:common"))
+    implementation(project(":feature:home"))
     implementation(project(":feature:search"))
     implementation(project(":sync:work"))
 
