@@ -3,7 +3,7 @@ package com.github.smmousavi.datasource.characters.di
 import com.github.smmousavi.datasource.characters.local.CharactersLocalDataSource
 import com.github.smmousavi.datasource.characters.local.DefaultCharactersLocalDataSource
 import com.github.smmousavi.datasource.characters.remote.CharactersRemoteDataSource
-import com.github.smmousavi.datasource.characters.remote.DefaultCharactersRemoteDataSource
+import com.github.smmousavi.datasource.characters.remote.DefaultCharacterRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,5 +17,5 @@ abstract class CharactersDataSourceModule {
     abstract fun bindsLocalDataSource(localDataSource: DefaultCharactersLocalDataSource): CharactersLocalDataSource
 
     @Binds
-    abstract fun bindsRemoteDataSource(remoteDataSource: DefaultCharactersRemoteDataSource): CharactersRemoteDataSource
+    abstract fun bindsRemoteDataSource(remoteDataSource: DefaultCharacterRemoteDataSource): CharactersRemoteDataSource
 }

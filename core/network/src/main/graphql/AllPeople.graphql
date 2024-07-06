@@ -1,33 +1,34 @@
-query People($first: Int, $after: String) {
+query AllPeople($first: Int, $after: String) {
     allPeople(first: $first, after: $after) {
         totalCount
-        pageInfo {
-            hasNextPage
-            endCursor
-        }
         people {
-            id
             name
+            birthYear
+            eyeColor
+            gender
+            hairColor
             height
             mass
-            hairColor
             skinColor
-            eyeColor
-            birthYear
-            gender
-            homeworld {
-                name
-            }
             filmConnection {
                 films {
                     title
+                    created
                     director
+                    id
+                    openingCrawl
                 }
             }
             species {
-                name
                 language
+                name
+                homeworld {
+                    population
+                }
             }
+            created
+            edited
+            id
         }
     }
 }
