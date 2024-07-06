@@ -23,26 +23,33 @@ class DefaultCharactersRepository @Inject constructor(
     @Dispatcher(AppDispatchers.IO) val ioDispatcher: CoroutineDispatcher,
 ) : CharactersRepository {
 
-    override fun getCharactersPaging(pageSize: Int): Flow<Result<PagingData<Character>>> =
-        flow {
-            emit(Result.Loading)
-            try {
-                val pager = Pager(
-                    config = PagingConfig(pageSize = pageSize, enablePlaceholders = false),
-                    pagingSourceFactory = {
-                        CharactersPagingSource(
-                            localDataSource,
-                            remoteDataSource
-                        )
-                    }
-                ).flow
-                pager.collect {
-                    emit(Result.Success(it))
+    override fun getCharactersPaging(pageSize: Int) = flow {
+        emit(Result.Loading)
+        try {
+            val pager = Pager(
+                config = PagingConfig(
+                    pageSize = pageSize,
+                    enablePlaceholders = false
+                ),
+                pagingSourceFactory = {
+                    CharactersPagingSource(
+                        localDataSource,
+                        remoteDataSource
+                    )
                 }
-            } catch (e: Exception) {
-                emit(Result.Error(e))
-            }
+            ).flow
+            emit(Result.Success(pager))
+        } catch (e: Exception) {
+            emit(Result.Error(e))
         }
+    }
+
+    override fun searchCharactersPaging(
+        pageSize: Int,
+        searchTerm: String,
+    ): Flow<Result<Flow<PagingData<Character>>>> {
+        TODO("Not yet implemented")
+    }
 
     override fun getCharacterById(id: String) = flow {
         emit(Result.Loading)
@@ -50,7 +57,7 @@ class DefaultCharactersRepository @Inject constructor(
             .data
             ?.person
             ?.asExternalModel()
-        emit(Result.Success(character))
+        emit(Result.Success(character!!))
     }
         .catch { e -> emit(Result.Error(e)) }
 }

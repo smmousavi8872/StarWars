@@ -35,10 +35,14 @@ android {
 }
 
 dependencies {
+
     implementation(project(":core:data:repository"))
     implementation(project(":core:model"))
     implementation(project(":core:common"))
     implementation(project(":core:network"))
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     // Hilt
     implementation(libs.hilt.android)

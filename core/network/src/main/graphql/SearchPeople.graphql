@@ -1,0 +1,14 @@
+
+#query SearchPeople($search: String) {
+#    allPeople(search: $search) {
+#        people {
+#            name
+#            height
+#            mass
+#            gender
+#            homeworld {
+#                name
+#            }
+#        }
+#    }
+#}
