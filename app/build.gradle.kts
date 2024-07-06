@@ -86,6 +86,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":feature:home"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:details"))
     implementation(project(":sync:work"))
 
     // AndroidX

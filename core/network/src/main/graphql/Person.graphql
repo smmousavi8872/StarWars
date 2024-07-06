@@ -1,6 +1,5 @@
-query Person($personID: ID!) {
-    person(personID: $personID) {
-        id
+query Person($personId: ID!) {
+    person(id: $personId) {
         name
         birthYear
         eyeColor
@@ -10,19 +9,117 @@ query Person($personID: ID!) {
         mass
         skinColor
         homeworld {
-            id
-            name
+            climates
+            created
+            diameter
+            edited
         }
         filmConnection {
+            totalCount
             films {
-                id
                 title
+                id
+                created
+                director
+                edited
+                episodeID
+                openingCrawl
             }
         }
         species {
-            id
             name
+            classification
+            designation
+            averageHeight
+            averageLifespan
+            eyeColors
+            hairColors
+            skinColors
             language
+            homeworld {
+                climates
+                created
+                diameter
+                edited
+            }
+
+            filmConnection {
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                    hasPreviousPage
+                    startCursor
+                }
+                edges {
+                    node {
+                        characterConnection {
+                            edges {
+                                cursor
+                            }
+                        }
+                    }
+                }
+                totalCount
+                films {
+                    title
+                    episodeID
+                    openingCrawl
+                    director
+                    producers
+                    releaseDate
+                    speciesConnection {
+                        totalCount
+                    }
+                    starshipConnection {
+                        totalCount
+                    }
+                    vehicleConnection {
+                        totalCount
+                    }
+                    characterConnection {
+                        pageInfo {
+                            hasNextPage
+                            hasPreviousPage
+                            startCursor
+                            endCursor
+                        }
+                        edges {
+                            node {
+                                birthYear
+                                created
+                                edited
+                                eyeColor
+                            }
+                            cursor
+                        }
+                        totalCount
+                        characters {
+                            birthYear
+                            created
+                            edited
+                            eyeColor
+                        }
+                    }
+                    planetConnection {
+                        totalCount
+                    }
+                    created
+                    edited
+                    id
+                }
+            }
+            created
+            edited
+            id
         }
+        starshipConnection {
+            totalCount
+        }
+        vehicleConnection {
+            totalCount
+        }
+        created
+        edited
+        id
     }
 }

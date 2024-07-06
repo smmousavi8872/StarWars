@@ -1,10 +1,10 @@
-package com.github.smmousavi.domain
+package com.github.smmousavi.domain.search
 
 import androidx.paging.PagingData
 import com.github.smmousavi.common.result.Result
 import com.github.smmousavi.model.Character
 import kotlinx.coroutines.flow.Flow
 
-interface GetCharactersUseCase {
+interface SearchCharactersUseCase {
     suspend operator fun invoke(): Flow<Result<Flow<PagingData<Character>>>>
 }

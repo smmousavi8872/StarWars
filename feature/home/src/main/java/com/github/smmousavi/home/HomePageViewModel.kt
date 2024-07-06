@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.github.smmousavi.common.result.Result
-import com.github.smmousavi.domain.GetCharactersUseCase
+import com.github.smmousavi.domain.character.GetCharactersUseCase
 import com.github.smmousavi.model.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

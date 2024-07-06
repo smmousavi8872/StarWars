@@ -1,6 +1,7 @@
 package com.github.smmousavi.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,13 +21,15 @@ import androidx.compose.ui.unit.sp
 import com.github.smmousavi.model.Character
 
 @Composable
-fun CharacterItem(person: Character) {
+fun CharacterItem(character: Character, onClick: (String) -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick(character.id) }
     ) {
         Row(
             modifier = Modifier
@@ -38,18 +41,23 @@ fun CharacterItem(person: Character) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = person.name,
+                    text = character.name,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = "Birth Year: ${person.birthYear}",
+                    text = "Birth Year: ${character.birthYear}",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Height: ${person.height}",
+                    text = "Height: ${character.height}",
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "id: ${character.id}",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -72,5 +80,5 @@ fun ProductItemPreview() {
         eyeColor = "Brown",
         mass = 70.3,
     )
-    CharacterItem(sampleProduct)
+    CharacterItem(sampleProduct, {})
 }

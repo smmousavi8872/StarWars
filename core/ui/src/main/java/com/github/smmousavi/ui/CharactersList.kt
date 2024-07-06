@@ -1,8 +1,8 @@
 package com.github.smmousavi.ui
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,10 +15,11 @@ import com.github.smmousavi.model.Character
 
 
 @Composable
-fun CharacterList(characters: LazyPagingItems<Character>) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = Modifier.padding(8.dp)
+fun CharacterList(characters: LazyPagingItems<Character>, onClick: (String) -> Unit = {}) {
+    LazyColumn(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         items(characters.itemCount) { index ->
             Card(
@@ -30,7 +31,9 @@ fun CharacterList(characters: LazyPagingItems<Character>) {
                 )
             ) {
                 characters[index]?.let {
-                    CharacterItem(it)
+                    CharacterItem(it) { id ->
+                        onClick(id)
+                    }
                 }
             }
         }
