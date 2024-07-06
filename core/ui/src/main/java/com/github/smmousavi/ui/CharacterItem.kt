@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.smmousavi.model.Character
+import com.github.smmousavi.test_doubles.character.Faker
 
 @Composable
 fun CharacterItem(character: Character, onClick: (String) -> Unit) {
@@ -69,16 +70,5 @@ fun CharacterItem(character: Character, onClick: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun CharacterItemPreview() {
-    val sampleProduct = Character(
-        id = "1",
-        name = "Mohsen",
-        birthYear = "1993",
-        height = 175,
-        gender = "male",
-        skinColor = "White",
-        hairColor = "Black",
-        eyeColor = "Brown",
-        mass = 70.3,
-    )
-    CharacterItem(sampleProduct, {})
+    CharacterItem(Faker.character(), {})
 }

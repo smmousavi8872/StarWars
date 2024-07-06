@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.github.smmousavi.model.Character
+import com.github.smmousavi.test_doubles.character.Faker
 
 
 @Composable
@@ -42,74 +43,27 @@ fun CharacterList(characters: LazyPagingItems<Character>, onClick: (String) -> U
 
 @Preview(showBackground = true)
 @Composable
-fun ProductListPreview() {
-    val sampleProducts = listOf(
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        ),
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        ),
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        ),
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        ),
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        ),
-        Character(
-            id = "1",
-            name = "Mohsen",
-            birthYear = "2000",
-            height = 180,
-            gender = "male",
-            skinColor = "White",
-            hairColor = "Black",
-            eyeColor = "Brown",
-            mass = 70.3,
-        )
-    )
-//    CharacterList(characters = sampleProducts)
+fun CharacterListPreview() {
+    val characters = Faker.characterList()
+    LazyColumn(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        items(characters.size) { index ->
+            Card(
+                modifier = Modifier
+                    .padding(8.dp),
+                shape = RoundedCornerShape(8.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 4.dp
+                )
+            ) {
+                characters[index].let {
+                    CharacterItem(it) { id ->
+                    }
+                }
+            }
+        }
+    }
 }

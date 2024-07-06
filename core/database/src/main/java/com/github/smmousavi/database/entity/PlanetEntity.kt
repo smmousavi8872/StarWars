@@ -12,4 +12,6 @@ data class PlanetEntity(
     val id: String,
     @ColumnInfo(name = "planetName")
     val name: String,
+    @ColumnInfo(name = "planetPopulation")
+    val population: Double,
 )

@@ -2,13 +2,13 @@ package com.github.smmousavi.repository.characters
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.github.smmousavi.asExternalModel
 import com.github.smmousavi.common.network.AppDispatchers
 import com.github.smmousavi.common.network.Dispatcher
 import com.github.smmousavi.common.result.Result
 import com.github.smmousavi.datasource.characters.local.CharactersLocalDataSource
 import com.github.smmousavi.datasource.characters.remote.CharactersRemoteDataSource
 import com.github.smmousavi.pagingsource.CharactersPagingSource
-import com.github.smmousavi.repository.asExternalModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -47,8 +47,8 @@ class DefaultCharactersRepository @Inject constructor(
         val character = remoteDataSource.getCharacterById(id)
             .data
             ?.person
-            ?.asExternalModel()
-        emit(Result.Success(character!!))
+            .asExternalModel()
+        emit(Result.Success(character))
     }
         .catch { e -> emit(Result.Error(e)) }
 }

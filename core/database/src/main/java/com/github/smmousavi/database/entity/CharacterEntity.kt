@@ -1,6 +1,7 @@
 package com.github.smmousavi.database.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -27,5 +28,7 @@ data class CharacterEntity(
     val skinColor: String,
     @ColumnInfo(name = "searched")
     val searched: Boolean,
+    @Embedded
+    val species: SpeciesEntity,
 )
 

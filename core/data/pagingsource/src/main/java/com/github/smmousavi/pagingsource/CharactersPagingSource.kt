@@ -20,15 +20,19 @@ class CharactersPagingSource(
                 first = params.loadSize,
                 after = position.toString()
             )
-            val results = response.data?.allPeople?.people?.map {
+            val entityResults = response.data?.allPeople?.people?.map {
                 it.asEntity()
             } ?: emptyList()
 
-            localDataSource.insertAllCharacters(results)
+            val results = response.data?.allPeople?.people?.map {
+                it.asExternalModel()
+            } ?: emptyList()
+
+            localDataSource.insertAllCharacters(entityResults)
             LoadResult.Page(
-                data = results.map { it.asExternalModel() },
+                data = results,
                 prevKey = if (position == 0) null else position - 1,
-                nextKey = if (results.isEmpty()) null else position + 1
+                nextKey = if (entityResults.isEmpty()) null else position + 1
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
