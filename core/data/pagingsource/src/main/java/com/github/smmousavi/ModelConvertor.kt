@@ -132,8 +132,8 @@ fun CharacterResponse.asEntity(): CharacterEntity = CharacterEntity(
     eyeColor = eyeColor ?: "",
     gender = gender ?: "",
     hairColor = hairColor ?: "",
-    height = height ?: 0,
-    mass = mass ?: 0.0,
+    height = convertToInt(height),
+    mass = convertToDouble(mass),
     skinColor = skinColor ?: "",
     searched = true,
     species = SpeciesEntity(
@@ -155,8 +155,8 @@ fun CharacterResponse.asExternalModel(): Character = Character(
     eyeColor = eyeColor ?: "",
     gender = gender ?: "",
     hairColor = hairColor ?: "",
-    height = height ?: 0,
-    mass = mass ?: 0.0,
+    height = convertToInt(height),
+    mass = convertToDouble(mass),
     skinColor = skinColor ?: "",
     species = Species(
         id = "",
@@ -171,4 +171,8 @@ fun CharacterResponse.asExternalModel(): Character = Character(
     films = listOf()
 )
 
+private fun convertToInt(string: String?) =
+    if (string != null && string.matches("-?\\d+(\\.\\d+)?".toRegex())) string.toInt() else 0
 
+private fun convertToDouble(string: String?) =
+    if (string != null && string.matches("-?\\d+(\\.\\d+)?".toRegex())) string.toDouble() else 0.0

@@ -33,3 +33,5 @@ class SearchCharacterPagingSource(
         return state.anchorPosition
     }
 }
+
+private const val TAG = "SearchCharacterPaging"
