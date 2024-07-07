@@ -15,9 +15,9 @@ data class CharacterResponse(
     @SerializedName("name")
     val name: String?,
     @SerializedName("height")
-    val height: Int?,
+    val height: String?,
     @SerializedName("mass")
-    val mass: Double?,
+    val mass: String?,
     @SerializedName("hair_color")
     val hairColor: String?,
     @SerializedName("skin_color")
