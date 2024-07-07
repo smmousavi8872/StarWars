@@ -37,7 +37,7 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel 
     val charactersState by viewModel.characters.collectAsState()
     val refreshing by viewModel.isRefreshing.collectAsState()
 
-    // Call getAllProducts() when the composable is first displayed
+    // Call getAllCharacters() when the composable is first displayed
     LaunchedEffect(Unit) {
         viewModel.getAllCharacters()
     }
@@ -80,9 +80,6 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel 
                         contentAlignment = Alignment.TopCenter
                     ) {
                         val items = result.data.collectAsLazyPagingItems()
-                        if (items.itemCount == 0) {
-                            LoadingWheel("Loading...")
-                        }
                         CharacterList(characters = items) { id ->
                             navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
                         }
@@ -90,9 +87,8 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel 
                 }
 
                 is Result.Error -> {
-                    val message = (charactersState as Result.Error).exception.message
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = message ?: "Error occurred!")
+                        Text(text = result.exception.message ?: "Error occurred!")
                     }
                 }
             }

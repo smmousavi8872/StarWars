@@ -6,3 +6,4 @@ sealed interface Result<out T> {
     data object Loading : Result<Nothing>
 }
 
+

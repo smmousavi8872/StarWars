@@ -1,6 +1,7 @@
 package com.github.smmousavi.search
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.github.smmousavi.common.result.Result
 import com.github.smmousavi.domain.search.SearchCharactersUseCase
@@ -10,10 +11,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
@@ -23,14 +26,15 @@ class SearchScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
-    val searchTerm: StateFlow<String> = _searchQuery
+    val searchQuery: StateFlow<String> = _searchQuery
 
     val searchResult: Flow<Result<Flow<PagingData<Character>>>> =
-        searchTerm.flatMapLatest { query ->
-            searchCharacterUseCase.invoke(query)
-                .debounce(300)
-                .distinctUntilChanged()
-        }
+        searchQuery.debounce(300)
+            .distinctUntilChanged()
+            .flatMapLatest { query ->
+                searchCharacterUseCase.invoke(query)
+            }
+            .stateIn(viewModelScope, SharingStarted.Lazily, Result.Loading)
 
     fun searchCharacter(search: String) {
         _searchQuery.value = search
