@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchCharacterRepository {
 
-    fun searchCharacter(
+    suspend fun searchCharacter(
         searchTerm: String,
         pageSize: Int,
     ): Flow<PagingData<Character>>
