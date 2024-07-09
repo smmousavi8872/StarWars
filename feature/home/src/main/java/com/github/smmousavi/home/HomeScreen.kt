@@ -1,5 +1,4 @@
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
@@ -22,22 +21,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.github.smmousavi.common.Constants.DETAILS_SCREEN_ROUT
 import com.github.smmousavi.common.Constants.SEARCH_SCREEN_ROUT
-import com.github.smmousavi.common.result.Result
 import com.github.smmousavi.home.HomeScreenViewModel
 import com.github.smmousavi.ui.CharacterList
+import com.github.smmousavi.ui.ErrorScreen
 import com.github.smmousavi.ui.LoadingWheel
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel = hiltViewModel()) {
-    val charactersState by viewModel.characters.collectAsState()
     val refreshing by viewModel.isRefreshing.collectAsState()
+    val charactersResult = viewModel.characters.collectAsLazyPagingItems()
 
-    // Call getAllProducts() when the composable is first displayed
+    // Call getAllCharacters() when the composable is first displayed
     LaunchedEffect(Unit) {
         viewModel.getAllCharacters()
     }
@@ -62,37 +62,27 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeScreenViewModel 
         Box(
             modifier = Modifier
                 .padding(paddingValues)
-                .pullRefresh(state)
+                .pullRefresh(state),
         ) {
-            when (val result = charactersState) {
-                is Result.Loading -> {
+            when (val charactersState = charactersResult.loadState.refresh) {
+                is LoadState.Loading -> {
                     Box(
                         modifier = Modifier.fillMaxWidth(),
                         contentAlignment = Alignment.TopCenter
                     ) {
-                        LoadingWheel("Loading...")
+                        // Show loading indicator when first loading
+                        LoadingWheel(contentDesc = "Loading ...")
                     }
                 }
 
-                is Result.Success -> {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.TopCenter
-                    ) {
-                        val items = result.data.collectAsLazyPagingItems()
-                        if (items.itemCount == 0) {
-                            LoadingWheel("Loading...")
-                        }
-                        CharacterList(characters = items) { id ->
-                            navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
-                        }
-                    }
+                is LoadState.Error -> {
+                    // Show error message when first loading fails
+                    ErrorScreen(error = charactersState.error) { charactersResult.retry() }
                 }
 
-                is Result.Error -> {
-                    val message = (charactersState as Result.Error).exception.message
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = message ?: "Error occurred!")
+                else -> {
+                    CharacterList(characters = charactersResult) { id ->
+                        navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
                     }
                 }
             }

@@ -1,4 +1,3 @@
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,19 +18,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.paging.PagingData
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.github.smmousavi.common.Constants.DETAILS_SCREEN_ROUT
-import com.github.smmousavi.common.result.Result
-import com.github.smmousavi.model.Character
 import com.github.smmousavi.search.SearchScreenViewModel
 import com.github.smmousavi.ui.CharacterList
+import com.github.smmousavi.ui.ErrorScreen
 import com.github.smmousavi.ui.LoadingWheel
-import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,13 +37,13 @@ fun SearchScreen(
     navController: NavHostController,
     viewModel: SearchScreenViewModel = hiltViewModel(),
 ) {
-    val searchQuery by viewModel.searchTerm.collectAsState()
-    val searchResult by viewModel.searchResult.collectAsState(initial = Result.Loading)
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val searchResult = viewModel.searchResult.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Search Products") },
+                title = { Text("Search Characters") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
@@ -67,30 +65,31 @@ fun SearchScreen(
                 TextField(
                     value = searchQuery,
                     onValueChange = { query -> viewModel.searchCharacter(query) },
-                    label = { Text("Search Products") },
+                    label = { Text("Search Characters") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (searchQuery.isNotEmpty()) {
-                    when (searchResult) {
-                        Result.Loading -> {
-                            LoadingWheel(contentDesc = "Loading ...")
-                        }
-
-                        is Result.Success -> {
-                            val pagingDataFlow =
-                                (searchResult as Result.Success<Flow<PagingData<Character>>>).data
-                            val lazyPagingItems = pagingDataFlow.collectAsLazyPagingItems()
-
-                            CharacterList(characters = lazyPagingItems) { id ->
-                                navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
+                if (searchQuery.trim().isNotEmpty()) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.TopCenter
+                    ) {
+                        when (val state = searchResult.loadState.refresh) {
+                            is LoadState.Loading -> {
+                                LoadingWheel(contentDesc = "Loading ...")
                             }
-                        }
 
-                        is Result.Error -> {
-                            Text("Error: ${(searchResult as Result.Error).exception.message}")
+                            is LoadState.Error -> {
+                                ErrorScreen(error = state.error) { searchResult.retry() }
+                            }
+
+                            else -> {
+                                CharacterList(characters = searchResult) { id ->
+                                    navController.navigate("$DETAILS_SCREEN_ROUT/{$id}")
+                                }
+                            }
                         }
                     }
                 } else {
@@ -101,8 +100,6 @@ fun SearchScreen(
                 }
             }
         }
-
-
     }
 }
 

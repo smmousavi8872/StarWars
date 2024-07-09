@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {
 
-    fun getCharactersPaging(pageSize: Int): Flow<Result<Flow<PagingData<Character>>>>
+    suspend fun getCharactersPaging(pageSize: Int): Flow<PagingData<Character>>
 
-    fun getCharacterById(id: String): Flow<Result<Character>>
+    suspend fun getCharacterById(id: String): Flow<Result<Character>>
 
 
 }

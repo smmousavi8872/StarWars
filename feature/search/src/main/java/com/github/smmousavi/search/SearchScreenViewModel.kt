@@ -2,7 +2,6 @@ package com.github.smmousavi.search
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
-import com.github.smmousavi.common.result.Result
 import com.github.smmousavi.domain.search.SearchCharactersUseCase
 import com.github.smmousavi.model.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,14 +22,14 @@ class SearchScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
-    val searchTerm: StateFlow<String> = _searchQuery
+    val searchQuery: StateFlow<String> = _searchQuery
 
-    val searchResult: Flow<Result<Flow<PagingData<Character>>>> =
-        searchTerm.flatMapLatest { query ->
-            searchCharacterUseCase.invoke(query)
-                .debounce(300)
-                .distinctUntilChanged()
-        }
+    val searchResult: Flow<PagingData<Character>> =
+        searchQuery.debounce(300)
+            .distinctUntilChanged()
+            .flatMapLatest { query ->
+                searchCharacterUseCase.invoke(query)
+            }
 
     fun searchCharacter(search: String) {
         _searchQuery.value = search
