@@ -5,9 +5,10 @@ import com.apollographql.apollo3.api.ApolloResponse
 import com.github.smmousavi.network.AllPeopleQuery
 import com.github.smmousavi.network.PersonQuery
 import javax.inject.Inject
+import javax.inject.Named
 
 class DefaultCharactersRemoteDataSource @Inject constructor(
-     private val apolloClient: ApolloClient,
+    @Named("Apollo") private val apolloClient: ApolloClient,
 ) : CharactersRemoteDataSource {
 
     override suspend fun getAllCharacters(

@@ -1,0 +1,14 @@
+subscription OnNewFilms {
+    allFilms {
+        films {
+            id
+            title
+            episodeID
+            openingCrawl
+            director
+            producers
+            releaseDate
+        }
+
+    }
+}

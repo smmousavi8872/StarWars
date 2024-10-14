@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 
 
 @Module
@@ -13,9 +14,19 @@ import dagger.hilt.components.SingletonComponent
 object ApolloClientModule {
 
     @Provides
+    @Named("Apollo")
     fun provideApolloClient() =
         ApolloClient.Builder()
             .serverUrl(GRAPHQL_BASE_URL)
             .build()
+
+    @Provides
+    @Named("WebSocket")
+    fun provideApolloWebsocket() = ApolloClient.Builder()
+        // Server URL for regular queries/mutations
+        .serverUrl(GRAPHQL_BASE_URL)
+        // Server URL for your websocket
+        .webSocketServerUrl("wss://your-graphql-endpoint.com/subscriptions")
+        .build()
 }
 

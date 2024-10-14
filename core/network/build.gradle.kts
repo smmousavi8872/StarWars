@@ -61,6 +61,11 @@ dependencies {
     // apollo graphql
     implementation(libs.apollo.runtime)
 
+    // apollo subscription using websocket
+    implementation("com.apollographql.apollo3:apollo-normalized-cache:3.8.4")
+    implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.8.4")
+    implementation("com.apollographql.apollo3:apollo-websocket:3.8.4")
+
     // Testing
     testImplementation(libs.androidx.work.testing)
     testImplementation(libs.robolectric)
