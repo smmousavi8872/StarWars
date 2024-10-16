@@ -1,6 +1,6 @@
 # StarsWar
 
-StarWars is a Star Wars API client application leveraging modern Android development technologies and architectural principles. This project is structured to maximize cohesion and minimize coupling, ensuring maintainability and scalability. 
+StarWars is a Star Wars API client application leveraging modern Android development technologies and architectural principles. This project is structured to maximize cohesion and minimize coupling amoung its modules, ensuring maintainability and scalability. 
 It uses GraphQL API services to query required data to the StarsWar GraphQL server through [this](https://swapi-graphql.netlify.app/.netlify/functions/index) endpoint. 
 
 ## Technologies Used
